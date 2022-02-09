@@ -1,6 +1,5 @@
 import random
-import string
-import pharse
+import phrase
 
 
 class Quiz:
@@ -8,24 +7,26 @@ class Quiz:
     def __init__(self):
         self.missed = 0
         self.guesses = 0
-        self.phrases = [pharse.Phrase('A bird in the hand is worth two in the bush'),
-                        pharse.Phrase('A watched pot never boils'),
-                        pharse.Phrase('It’s time to bite the bullet'),
-                        pharse.Phrase('Take it with a grain of salt'),
-                        pharse.Phrase('Up the creek without a paddle')]
+        self.phrases = [phrase.Phrase('A bird in the hand is worth two in the bush'),
+                        phrase.Phrase('A watched pot never boils'),
+                        phrase.Phrase('Its time to bite the bullet'),
+                        phrase.Phrase('Take it with a grain of salt'),
+                        phrase.Phrase('Up the creek without a paddle')]
         self.active_phrase = None
+        self.user_lives = 5
 
     def start(self):
         """Starts the game and manages user lives."""
         self.welcome()
         self.get_random_phrase()
-        while self.missed < 5:
+        while self.missed < self.user_lives:
             guess = self.get_guess()
             if not self.active_phrase.check_letters(guess):
                 self.missed += 1
-                print(f'You have used {self.missed} lives! You have {5 - self.missed} lives remaining')
+                print(f'You have used {self.missed} lives! You have {self.user_lives - self.missed} lives remaining')
             if self.active_phrase.check_complete():
-                break
+                self.game_over()
+                exit()
 
     def get_random_phrase(self):
         """Grabs a random phrase from list and sets the game instance phrase."""
@@ -44,7 +45,8 @@ class Quiz:
         while True:
             self.active_phrase.display()
             letter = input('What letter would you like to choose?  ')
-            if len(letter) > 1 or string.ascii_lowercase:
+            print(len(letter))
+            if len(letter) > 1 or not letter.isalpha():
                 print('Invalid input, please select a single letter')
             else:
                 self.guesses += 1

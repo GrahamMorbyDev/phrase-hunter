@@ -2,7 +2,8 @@ class Phrase:
     # __init__ this is the actual phrase the Phrase object is representing
     def __init__(self, phrase):
         self.phrase = phrase
-        self.phrase_guess = []
+        self.phrase_guess = [False] * len(phrase)
+        self.check_letters(' ')
 
     def __str__(self):
         string = ' '
@@ -29,7 +30,7 @@ class Phrase:
         """
         value = False
         for i, letter in enumerate(self.phrase):
-            if guess == letter:
+            if guess == letter.lower():
                 self.phrase_guess[i] = True
                 value = True
         return value
