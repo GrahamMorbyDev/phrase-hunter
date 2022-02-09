@@ -2,7 +2,7 @@ import random
 import phrase
 
 
-class Quiz:
+class Game:
     # __init__ to contain missed, phrases, active phrase, guesses
     def __init__(self):
         self.missed = 0
@@ -64,7 +64,7 @@ class Quiz:
 
         new_game = input('Would you like to play again? y/n ')
         if new_game.lower() == 'y':
-            new_game = Quiz()
+            new_game = Game()
             new_game.start()
         elif new_game.lower() == 'n':
             print('Thank you for playing my game!')

@@ -1,7 +1,6 @@
-from quiz import Quiz
-import random
+from game import Game
 
 # Dunder main to start the game
 if __name__ == '__main__':
-    game = Quiz()
+    game = Game()
     game.start()
