@@ -30,7 +30,7 @@ class Phrase:
         """
         value = False
         for i, letter in enumerate(self.phrase):
-            if guess == letter.lower():
+            if guess == letter:
                 self.phrase_guess[i] = True
                 value = True
         return value
